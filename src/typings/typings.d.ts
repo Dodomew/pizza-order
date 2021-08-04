@@ -4,5 +4,6 @@ type RestaurantProps = {
     "id": number,
     "latitude": number,
     "longitude": number,
-    "name": string
+    "name": string,
+    "distance"?: string
 }
