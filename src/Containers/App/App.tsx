@@ -1,13 +1,14 @@
 import React from 'react';
+import Cart from "../Cart/Cart";
+import RestaurantOverview from "../RestaurantOverview/RestaurantOverview";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        Hallo
-      </header>
+    <div className="main">
+      <RestaurantOverview />
+      <Cart />
     </div>
-  );
+  )
 }
 
 export default App;
