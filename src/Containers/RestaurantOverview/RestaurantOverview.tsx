@@ -12,19 +12,20 @@ const RestaurantOverview = () => {
     }, [])
 
     return (
-        <div>
-            <h3>List pizza</h3>
-            <ul>
-                {restaurants && restaurants.length && (
-                    restaurants?.map((restaurant) => {
+        <div className="main">
+            <h3>Pizza restaurants near you</h3>
+            {restaurants && restaurants.length && (
+                <ul>
+                    {restaurants?.map((restaurant) => {
                         return (
-                            <li>
+                            <li key={`${restaurant.name}_${restaurant.id}`}>
                                 {restaurant.name}
                             </li>
                         )
-                    })
-                )}
-            </ul>
+                    })}
+                </ul>
+            )}
+
         </div>
     )
 }

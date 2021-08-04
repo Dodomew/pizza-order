@@ -4,7 +4,7 @@ import RestaurantOverview from "../RestaurantOverview/RestaurantOverview";
 
 const App = () => {
   return (
-    <div className="main">
+    <div className="page">
       <RestaurantOverview />
       <Cart />
     </div>

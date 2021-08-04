@@ -1,8 +1,9 @@
 import React from 'react';
+import "./cart.scss";
 
 const Cart = () => {
     return (
-        <div>
+        <div className="cart">
             <h3>Cart</h3>
             <ul>
                 <li>
