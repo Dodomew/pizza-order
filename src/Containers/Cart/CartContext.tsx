@@ -11,7 +11,7 @@ type Props = {
 };
 
 interface ContextMethods {
-  addToCart(payload: { id: number; quantity: number }): void;
+  addToCart(payload: { id: number }): void;
 }
 
 interface CartContextProps extends ContextMethods {
@@ -27,7 +27,7 @@ interface InitialState {
 export const CartContext = createContext<CartContextProps>({
   cart: [],
   checkout: false,
-  addToCart: (payload: { id: number; quantity: number }) => null,
+  addToCart: (payload: { id: number }) => null,
 });
 
 const CartContextProvider = ({ children }: Props) => {
@@ -38,7 +38,8 @@ const CartContextProvider = ({ children }: Props) => {
 
   const [state, dispatch] = useReducer(CartReducer, InitialState);
 
-  const addToCart = (payload: { id: number; quantity: number }) => {
+  const addToCart = (payload: { id: number }) => {
+    console.log("add to cart");
     dispatch({
       type: "ADD_TO_CART",
       payload,

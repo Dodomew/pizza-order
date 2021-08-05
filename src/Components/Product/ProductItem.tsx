@@ -12,7 +12,8 @@ const ProductItem = (item: ItemProps) => {
   const { addToCart } = useCart();
 
   const handleAddItem = () => {
-    addToCart({ id: item.id, quantity: 1 });
+    console.log("handleAddItem");
+    addToCart({ id: item.id });
   };
 
   return (

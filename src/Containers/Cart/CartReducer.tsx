@@ -6,7 +6,7 @@ type CartItemProps = {
 };
 
 interface InitialState {
-  cart: CartItemProps[] | [];
+  cart: CartItemProps[];
   checkout: boolean;
 }
 
@@ -18,29 +18,36 @@ export const CartReducer = (
 
   switch (type) {
     case "ADD_TO_CART":
-      console.log(payload);
-      const newCart: CartItemProps[] = state.cart;
-      const itemAlreadyExists = newCart.find(
+      const isInCart = state.cart.some(
         (item) => item.menuItemId === action.payload.id
       );
 
-      if (itemAlreadyExists) {
-        console.log("+1");
-        itemAlreadyExists.quantity++;
+      if (isInCart) {
+        // only increment corresponding item
+        return {
+          ...state,
+          cart: state.cart.map((item) =>
+            item.menuItemId === action.payload.id
+              ? {
+                  menuItemId: item.menuItemId,
+                  quantity: item.quantity + 1,
+                }
+              : item
+          ),
+        };
       } else {
-        console.log("new");
-        newCart.push({
-          menuItemId: action.payload.id,
-          quantity: 1,
-        });
+        // add new item to state
+        return {
+          ...state,
+          cart: [
+            ...state.cart,
+            {
+              menuItemId: action.payload.id,
+              quantity: 1,
+            },
+          ],
+        };
       }
-
-      console.log({ ...state, cart: newCart });
-
-      return {
-        ...state,
-        cart: newCart,
-      };
 
     default:
       return state;
