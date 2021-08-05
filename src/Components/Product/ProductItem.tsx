@@ -13,7 +13,7 @@ const ProductItem = (item: ItemProps) => {
 
   const handleAddItem = () => {
     console.log("handleAddItem");
-    addToCart({ id: item.id });
+    addToCart({ id: item.id, price: item.price, name: item.name });
   };
 
   return (

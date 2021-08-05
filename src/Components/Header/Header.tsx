@@ -1,11 +1,16 @@
-import React from "react"
+import React from "react";
+import { useCart } from "../../Containers/Cart/CartContext";
+import "./header.scss";
 
 const Header = () => {
-    return(
-        <div className="header">
-            <button>Cart</button>
-        </div>
-    )
-}
+  const { toggleCartContainer, itemCount } = useCart();
+  return (
+    <div className="header">
+      <button className="header__button" onClick={toggleCartContainer}>
+        Cart {itemCount}
+      </button>
+    </div>
+  );
+};
 
 export default Header;
