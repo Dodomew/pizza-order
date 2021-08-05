@@ -30,20 +30,28 @@ const RestaurantOverview = () => {
     useEffect(() => {
         let componentIsMounted = true; // guard vs async mem leak
         getRestaurants().then((restaurants) => {
-            const updatedRestaurants = restaurants.map((restaurant) => {
-                const distanceInKm = getDistanceFromLatLonInKm(
-                    coords.latitude, coords.longitude, restaurant.latitude, restaurant.longitude
-                );
-                const updatedRestaurant = {
-                    ...restaurant,
-                    distance: distanceInKm.toFixed(1)
-                }
+            if(coords.latitude !== 0) {
+                const updatedRestaurants = restaurants.map((restaurant) => {
+                    const distanceInKm = getDistanceFromLatLonInKm(
+                        coords.latitude, coords.longitude, restaurant.latitude, restaurant.longitude
+                    );
+                    const updatedRestaurant = {
+                        ...restaurant,
+                        distance: parseFloat(distanceInKm.toFixed(1))
+                    }
+    
+                    return updatedRestaurant;
+                });
+    
+                updatedRestaurants.sort((restaurantA, restaurantB) => {
+                    return restaurantA.distance - restaurantB.distance;
+                  });
 
-                return updatedRestaurant;
-            });
+                  restaurants = updatedRestaurants;
+            }
 
             if(componentIsMounted) {
-                setRestaurants(updatedRestaurants)
+                setRestaurants(restaurants)
             }
         });
         return () => { 
@@ -54,24 +62,28 @@ const RestaurantOverview = () => {
     return (
         <div className="main">
             <h3>Pizza restaurants near you</h3>
-            {restaurants && restaurants.length && (
+            {restaurants && restaurants.length ? (
                 <ul className="overview">
                     {restaurants.map((restaurant) => {
                         return (
                             <li key={`${restaurant.name}_${restaurant.id}`} className="overview-item">
                                 <Link to={`restaurants/${restaurant.id}`}>
-                                <div className="overview-item__content">
-                                    <img src="https://via.placeholder.com/150" alt={restaurant.name}></img>
-                                    <h4 className="overview-item__title">{restaurant.name}</h4>
-                                    <p>{restaurant.address1}</p>
-                                    <p>{restaurant.address2}</p>
-                                </div>
+                                    <div className="overview-item__content">
+                                        <img src="https://via.placeholder.com/150" alt={restaurant.name}></img>
+                                        <h4 className="overview-item__title">{restaurant.name}</h4>
+                                        <p>{restaurant.address1}</p>
+                                        <p>{restaurant.address2}</p>
+                                        {restaurant.distance && (
+                                            <p>{`${restaurant.distance}km`}</p>
+                                        )}
+                                        
+                                    </div>
                                 </Link>
                             </li>
                         )
                     })}
                 </ul>
-            )}
+            ) : <p>loading</p>}
         </div>
     )
 }

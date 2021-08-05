@@ -5,5 +5,14 @@ type RestaurantProps = {
     "latitude": number,
     "longitude": number,
     "name": string,
-    "distance"?: string
+    "distance"?: number
+}
+
+type RestaurantMenuProps = {
+    "id": number,
+    "category": string,
+    "name": string,
+    "topping": string[]
+    "price": number,
+    "rank": number
 }

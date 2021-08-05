@@ -1,7 +1,7 @@
 import React from 'react';
 import Cart from "../Cart/Cart";
 import RestaurantOverview from "../RestaurantOverview/RestaurantOverview";
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom'
+import {Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
 import RestaurantDetailView from '../RestaurantDetailView/RestaurantDetailView';
 
 const App = () => {
@@ -9,8 +9,11 @@ const App = () => {
     <div className="page">
       <Router>
         <Switch>
+          <Route exact path="/restaurants/:id" component={RestaurantDetailView} />
+          <Route exact path="/restaurants/">
+            <Redirect to="/"></Redirect>
+          </Route>
           <Route exact path="/" component={RestaurantOverview}/> 
-          <Route exact path="/restaurants/:uid" component={RestaurantDetailView} />
         </Switch>
       </Router>
       <Cart />
