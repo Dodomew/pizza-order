@@ -14,9 +14,7 @@ export const CartReducer = (
   state: InitialState,
   action: Action
 ): InitialState => {
-  const { type, payload } = action;
-
-  switch (type) {
+  switch (action.type) {
     case "ADD_TO_CART":
       const isInCart = state.cart.some(
         (item) => item.menuItemId === action.payload.id
@@ -48,6 +46,9 @@ export const CartReducer = (
           ],
         };
       }
+    case "TOGGLE_CART_CONTAINER":
+      console.log("toggle");
+      return state;
 
     default:
       return state;
