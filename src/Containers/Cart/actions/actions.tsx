@@ -2,13 +2,22 @@ interface AddToCart {
   type: "ADD_TO_CART";
   payload: {
     id: number;
+    price: number;
+    name: string;
   };
 }
 
-interface ToggleCartContainer {
-  type: "TOGGLE_CART_CONTAINER";
+interface removeFromCart {
+  type: "REMOVE_FROM_CART";
+  payload: {
+    id: number;
+  };
 }
 
-type Action = AddToCart | ToggleCartContainer;
+interface UpdateCart {
+  type: "UPDATE_CART";
+}
+
+type Action = AddToCart | removeFromCart | UpdateCart;
 
 export default Action;

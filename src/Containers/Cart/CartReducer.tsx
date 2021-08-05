@@ -1,19 +1,17 @@
 import Action from "./actions/actions";
 
-type CartItemProps = {
-  menuItemId: number;
-  quantity: number;
+const totalSumOfItems = (cart: CartItemProps[]) => {
+  let itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  let total = cart
+    .reduce((total, item) => total + item.price * item.quantity, 0)
+    .toFixed(2);
+  return { itemCount, total };
 };
 
-interface InitialState {
-  cart: CartItemProps[];
-  checkout: boolean;
-}
-
 export const CartReducer = (
-  state: InitialState,
+  state: InitialCartState,
   action: Action
-): InitialState => {
+): InitialCartState => {
   switch (action.type) {
     case "ADD_TO_CART":
       const isInCart = state.cart.some(
@@ -29,6 +27,8 @@ export const CartReducer = (
               ? {
                   menuItemId: item.menuItemId,
                   quantity: item.quantity + 1,
+                  price: item.price,
+                  name: action.payload.name,
                 }
               : item
           ),
@@ -42,14 +42,21 @@ export const CartReducer = (
             {
               menuItemId: action.payload.id,
               quantity: 1,
+              price: action.payload.price,
+              name: action.payload.name,
             },
           ],
         };
       }
-    case "TOGGLE_CART_CONTAINER":
-      console.log("toggle");
-      return state;
-
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+      };
+    case "UPDATE_CART":
+      return {
+        ...state,
+        ...totalSumOfItems(state.cart),
+      };
     default:
       return state;
   }

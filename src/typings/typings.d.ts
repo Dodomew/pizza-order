@@ -16,3 +16,17 @@ type RestaurantMenuProps = {
     "price": number,
     "rank": number
 }
+
+interface InitialCartState {
+    cart: CartItemProps[];
+    checkout: boolean;
+    total: string;
+    itemCount: number;
+  }
+
+type CartItemProps = {
+    menuItemId: number;
+    quantity: number;
+    price: number;
+    name: string;
+  };
