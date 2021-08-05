@@ -17,14 +17,16 @@ const ProductItem = (item: ItemProps) => {
   };
 
   return (
-    <li key={`${item.name}_${item.id}`}>
+    <li key={`product_item_${item.name}_${item.id}`}>
       <h4>{item.name}</h4>
       <p>{item.price}</p>
       {item.topping && item.topping.length ? (
         <ul>
           {item.topping.map((topping) => {
             return (
-              <li key={`${item.name}_${topping}_${item.id}`}>{topping}</li>
+              <li key={`product_item_${item.name}_${topping}_${item.id}`}>
+                {topping}
+              </li>
             );
           })}
         </ul>

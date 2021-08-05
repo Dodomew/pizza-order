@@ -1,11 +1,10 @@
 import React from "react";
 import "./cart.scss";
+import CartCheckoutItem from "./CartCheckoutItem";
 import { useCart } from "./CartContext";
 
 const Cart = () => {
   const { cartContainerIsExpanded, cart, total } = useCart();
-  console.log(cart);
-  console.log(total);
 
   return (
     <div className={"cart" + (cartContainerIsExpanded ? " is-expanded" : "")}>
@@ -14,11 +13,10 @@ const Cart = () => {
         <ul>
           {cart.map((item) => {
             return (
-              <li>
-                <p>{item.quantity}</p>
-                <p>{item.name}</p>
-                <p>{item.price}</p>
-              </li>
+              <CartCheckoutItem
+                {...item}
+                key={`cart_checkout_item_${item.name}_${item.menuItemId}`}
+              />
             );
           })}
         </ul>

@@ -27,7 +27,12 @@ const RestaurantDetailView = () => {
       {menu && menu.length ? (
         <ul>
           {menu.map((menuItem) => {
-            return <ProductItem {...menuItem} />;
+            return (
+              <ProductItem
+                {...menuItem}
+                key={`product_item_${menuItem.name}_${menuItem.id}`}
+              />
+            );
           })}
         </ul>
       ) : null}
