@@ -26,14 +26,15 @@ export const CartContext = createContext<CartContextProps>({
   toggleCartContainer: () => null,
 });
 
+const InitialState: InitialCartState = {
+  cart: [],
+  checkout: false,
+  total: "0",
+  itemCount: 0,
+};
+
 const CartContextProvider = ({ children }: Props) => {
   const [cartContainerIsExpanded, setCartContainer] = React.useState(false);
-  const InitialState: InitialCartState = {
-    cart: [],
-    checkout: false,
-    total: "0",
-    itemCount: 0,
-  };
 
   const [state, dispatch] = useReducer(CartReducer, InitialState);
 

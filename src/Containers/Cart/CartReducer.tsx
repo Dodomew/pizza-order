@@ -1,11 +1,16 @@
 import Action from "./actions/actions";
 
-const totalSumOfItems = (cart: CartItemProps[]) => {
-  let itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-  let total = cart
+const totalSumOfItems = (state: InitialCartState) => {
+  const newState = { ...state };
+  newState.itemCount = newState.cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+  newState.total = newState.cart
     .reduce((total, item) => total + item.price * item.quantity, 0)
     .toFixed(2);
-  return { itemCount, total };
+
+  return { ...state, ...newState };
 };
 
 const addToCart = (
@@ -13,18 +18,16 @@ const addToCart = (
   state: InitialCartState
 ) => {
   const { id, price, name } = payload;
-  const isInCart = state.cart.some((item) => item.menuItemId === id);
   const newState = { ...state }; // copy state to avoid mutating directly
+  const isInCart = newState.cart.some((item) => item.menuItemId === id);
 
   if (isInCart) {
     // only increment corresponding item
     newState.cart = newState.cart.map((item) =>
       item.menuItemId === id
         ? {
-            menuItemId: item.menuItemId,
+            ...item,
             quantity: item.quantity + 1,
-            price: item.price,
-            name: item.name,
           }
         : item
     );
@@ -46,23 +49,26 @@ const addToCart = (
 
 const removeFromCart = (payload: { id: number }, state: InitialCartState) => {
   const { id } = payload;
-  const isInCart = state.cart.some((item) => item.menuItemId === id);
+  const newState = { ...state };
+  const isInCart = newState.cart.some((item) => item.menuItemId === id);
 
   if (!isInCart) {
-    return { ...state };
+    return { ...state, ...newState };
   }
-
-  const newState = { ...state };
 
   // if id is not the same, the item should stay in the array
   // if id matches, we decrement by 1. If quantity is now 0, remove it from array.
-  newState.cart = state.cart.filter((item) => {
-    if (item.menuItemId === id) {
-      item.quantity--;
-      if (item.quantity === 0) {
-        return false;
-      }
-    }
+  newState.cart = newState.cart.map((item) =>
+    item.menuItemId === id
+      ? {
+          ...item,
+          quantity: item.quantity - 1,
+        }
+      : item
+  );
+
+  newState.cart = newState.cart.filter((item) => {
+    if (item.quantity === 0) return false;
     return true;
   });
 
@@ -77,13 +83,9 @@ export const CartReducer = (
     case "ADD_TO_CART":
       return addToCart(action.payload, state);
     case "REMOVE_FROM_CART":
-      let newState = removeFromCart(action.payload, state);
-      return newState;
+      return removeFromCart(action.payload, state);
     case "UPDATE_CART":
-      return {
-        ...state,
-        ...totalSumOfItems(state.cart),
-      };
+      return totalSumOfItems(state);
     default:
       return state;
   }

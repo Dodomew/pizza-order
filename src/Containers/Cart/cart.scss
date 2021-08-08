@@ -6,6 +6,7 @@
     height: 100%;
     background-color: cornsilk;
     transition: right 0.2s;
+    overflow-y: scroll;
 
     &.is-expanded {
         right: 0%;
