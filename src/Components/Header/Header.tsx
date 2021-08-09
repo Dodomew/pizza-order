@@ -9,7 +9,7 @@ const Header = () => {
     <div className="header">
       <Link to={"/"}>LOGO</Link>
       <button className="header__button" onClick={toggleCartContainer}>
-        Cart {itemCount}
+        <span className="header__itemcount">{itemCount}</span>
       </button>
     </div>
   );

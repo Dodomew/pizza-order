@@ -25,7 +25,7 @@ const RestaurantDetailView = () => {
   }, [id, setRestaurantId]);
 
   return (
-    <>
+    <div className="restaurant-detail">
       <h1>The menu</h1>
       {menu && menu.length ? (
         <ul>
@@ -39,7 +39,7 @@ const RestaurantDetailView = () => {
           })}
         </ul>
       ) : null}
-    </>
+    </div>
   );
 };
 

@@ -12,13 +12,19 @@ const Routes = () => {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route exact path="/restaurants/:id" component={RestaurantDetailView} />
-        <Route exact path="/restaurants/">
-          <Redirect to="/"></Redirect>
-        </Route>
-        <Route exact path="/" component={RestaurantOverview} />
-      </Switch>
+      <div className="main">
+        <Switch>
+          <Route
+            exact
+            path="/restaurants/:id"
+            component={RestaurantDetailView}
+          />
+          <Route exact path="/restaurants/">
+            <Redirect to="/"></Redirect>
+          </Route>
+          <Route exact path="/" component={RestaurantOverview} />
+        </Switch>
+      </div>
     </Router>
   );
 };
