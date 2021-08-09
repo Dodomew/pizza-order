@@ -3,6 +3,7 @@ import { postOrder } from "../../api/endpoints";
 import "./cart.scss";
 import CartCheckoutItem from "./CartCheckoutItem";
 import { useCart } from "./CartContext";
+import CartOrderSummary from "./CartOrderSummary";
 
 const Cart = () => {
   const [currentOrderDetails, setCurrentOrderDetails] =
@@ -71,13 +72,7 @@ const Cart = () => {
       ) : null}
       <h4>{total}</h4>
       {currentOrderDetails ? (
-        <div className="cart-order-details">
-          <p>Your order</p>
-          <p>{currentOrderDetails.orderId}</p>
-          <p>{currentOrderDetails.orderedAt}</p>
-          <p>{currentOrderDetails.status}</p>
-          <p>{currentOrderDetails.esitmatedDelivery}</p>
-        </div>
+        <CartOrderSummary {...currentOrderDetails} />
       ) : null}
     </div>
   );
