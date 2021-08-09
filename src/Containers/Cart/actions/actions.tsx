@@ -18,6 +18,30 @@ interface UpdateCart {
   type: "UPDATE_CART";
 }
 
-type Action = AddToCart | removeFromCart | UpdateCart;
+interface PlaceOrder {
+  type: "PLACE_ORDER";
+  payload: {
+    orderDetails: OrderDetails;
+  };
+}
+
+interface GetRestaurantId {
+  type: "GET_RESTAURANT_ID";
+}
+
+interface SetRestaurantId {
+  type: "SET_RESTAURANT_ID";
+  payload: {
+    restaurantId: string;
+  };
+}
+
+type Action =
+  | AddToCart
+  | removeFromCart
+  | UpdateCart
+  | PlaceOrder
+  | GetRestaurantId
+  | SetRestaurantId;
 
 export default Action;

@@ -68,7 +68,9 @@ const removeFromCart = (payload: { id: number }, state: InitialCartState) => {
   );
 
   newState.cart = newState.cart.filter((item) => {
-    if (item.quantity === 0) return false;
+    if (item.quantity === 0) {
+      return false;
+    }
     return true;
   });
 
@@ -86,6 +88,9 @@ export const CartReducer = (
       return removeFromCart(action.payload, state);
     case "UPDATE_CART":
       return totalSumOfItems(state);
+    case "PLACE_ORDER":
+      const newOrderDetails = action.payload;
+      return { ...state, ...newOrderDetails };
     default:
       return state;
   }

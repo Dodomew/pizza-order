@@ -17,11 +17,32 @@ type RestaurantMenuProps = {
     "rank": number
 }
 
+type RequestOptionsCartItem = {
+  menuItemId: number,
+  quantity: number
+}
+
+type RequestOptions = {
+    method: string,
+    headers: { 'Content-Type': 'application/json' },
+    body: string
+}
+
 interface InitialCartState {
     cart: CartItemProps[];
     checkout: boolean;
     total: string;
     itemCount: number;
+    restaurantId: string;
+    orderDetails: OrderDetails
+  }
+
+  type OrderDetails = {
+    orderId: number,
+    totalPrice: number,
+    orderedAt: string, 
+    esitmatedDelivery: string,
+    status: string
   }
 
 type CartItemProps = {

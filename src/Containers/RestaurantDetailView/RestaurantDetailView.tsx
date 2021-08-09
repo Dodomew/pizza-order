@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getRestaurantMenu } from "../../api/endpoints";
 import ProductItem from "../../Components/Product/ProductItem";
+import { useCart } from "../Cart/CartContext";
 
 const RestaurantDetailView = () => {
   const [menu, setMenu] = React.useState<RestaurantMenuProps[]>([]);
   const { id } = useParams<{ id: string }>();
+  const { setRestaurantId } = useCart();
 
   useEffect(() => {
     let componentIsMounted = true;
@@ -13,13 +15,14 @@ const RestaurantDetailView = () => {
     getRestaurantMenu(id).then((menu) => {
       if (componentIsMounted) {
         setMenu(menu);
+        setRestaurantId({ id });
       }
     });
 
     return () => {
       componentIsMounted = false;
     };
-  }, [id]);
+  }, [id, setRestaurantId]);
 
   return (
     <>
