@@ -32,12 +32,12 @@ export const CartContext = createContext<CartContextProps>({
     esitmatedDelivery: "",
     status: "",
   },
-  addToCart: (payload: { id: number; price: number; name: string }) => null,
-  removeFromCart: (payload: { id: number }) => null,
+  addToCart: () => null,
+  removeFromCart: () => null,
   toggleCartContainer: () => null,
-  placeOrder: (payload: { orderDetails: OrderDetails }) => null,
+  placeOrder: () => null,
   getRestaurantId: () => null,
-  setRestaurantId: (payload: { id: string }) => null,
+  setRestaurantId: () => null,
 });
 
 const InitialState: InitialCartState = {

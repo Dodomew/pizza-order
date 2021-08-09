@@ -1,8 +1,13 @@
 .header {
+    position: sticky;
+    background-color: pink;
+    padding: 20px;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     &__button {
-        position: fixed;
-        top: 10px;
-        right: 10px;
         z-index: 10;
     }
 }
