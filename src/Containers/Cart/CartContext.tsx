@@ -88,6 +88,10 @@ const CartContextProvider = ({ children }: Props) => {
       type: "PLACE_ORDER",
       payload,
     });
+
+    dispatch({
+      type: "EMPTY_CART",
+    });
   };
 
   const toggleCartContainer = () => {

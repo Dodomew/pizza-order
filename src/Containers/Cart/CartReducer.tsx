@@ -91,6 +91,14 @@ export const CartReducer = (
     case "PLACE_ORDER":
       const newOrderDetails = action.payload;
       return { ...state, ...newOrderDetails };
+    case "EMPTY_CART":
+      const emptyCart = {
+        cart: [],
+        total: "0",
+        itemCount: 0,
+        restaurantId: "",
+      };
+      return { ...state, ...emptyCart };
     default:
       return state;
   }

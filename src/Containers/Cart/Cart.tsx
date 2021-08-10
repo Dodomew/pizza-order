@@ -9,6 +9,8 @@ const Cart = () => {
   const [currentOrderDetails, setCurrentOrderDetails] =
     React.useState<OrderDetails>();
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const {
     cartContainerIsExpanded,
     cart,
@@ -26,6 +28,7 @@ const Cart = () => {
   }, [orderDetails]);
 
   const handlePlaceOrder = async () => {
+    setIsLoading(true);
     const restaurantId = getRestaurantId();
     const newCart = cart.map((item) => {
       return {
@@ -48,32 +51,56 @@ const Cart = () => {
       })
       .catch((err) => {
         console.log("An error occured while placing the order.", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   return (
     <div className={"cart" + (cartContainerIsExpanded ? " is-expanded" : "")}>
-      <h3>Cart</h3>
-      <button onClick={toggleCartContainer}>Close cart X</button>
-      {cart && cart.length ? (
-        <>
-          <ul>
-            {cart.map((item) => {
-              return (
-                <CartCheckoutItem
-                  {...item}
-                  key={`cart_checkout_item_${item.name}_${item.menuItemId}`}
-                />
-              );
-            })}
-          </ul>
-          <button onClick={handlePlaceOrder}>Place order</button>
-        </>
-      ) : null}
-      <h4>{total}</h4>
-      {currentOrderDetails ? (
-        <CartOrderSummary {...currentOrderDetails} />
-      ) : null}
+      <button onClick={toggleCartContainer} className="cart__close-button">
+        Close cart X
+      </button>
+      <div className="cart__wrapper">
+        <div className="cart__header">
+          <h3 className="cart__title">
+            {currentOrderDetails ? "Your order" : "Your items"}
+          </h3>
+        </div>
+        <div className="cart__overview">
+          {currentOrderDetails ? (
+            <CartOrderSummary {...currentOrderDetails} />
+          ) : cart && cart.length ? (
+            <>
+              <ul className="cart__list">
+                {cart.map((item) => {
+                  return (
+                    <CartCheckoutItem
+                      {...item}
+                      key={`cart_checkout_item_${item.name}_${item.menuItemId}`}
+                    />
+                  );
+                })}
+              </ul>
+              <div className="cart__summary">
+                <div className="cart__sum">
+                  <h4 className="cart__total">Total : {total}kr</h4>
+                </div>
+                <button
+                  onClick={handlePlaceOrder}
+                  className="cart__order-button"
+                  disabled={isLoading}
+                >
+                  Place order
+                </button>
+              </div>
+            </>
+          ) : (
+            "Your cart is empty"
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -36,10 +36,15 @@ interface SetRestaurantId {
   };
 }
 
+interface EmptyCart {
+  type: "EMPTY_CART";
+}
+
 type Action =
   | AddToCart
   | removeFromCart
   | UpdateCart
+  | EmptyCart
   | PlaceOrder
   | GetRestaurantId
   | SetRestaurantId;
