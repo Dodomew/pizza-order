@@ -1,6 +1,6 @@
 .header {
     position: sticky;
-    background-color: pink;
+    background-color: #ce9da6;
     padding: 20px;
     top: 0;
     display: flex;
@@ -12,7 +12,7 @@
         width: 50px;
         height: 50px;
         -webkit-appearance: none;
-        background-color: #fff;
+        background-color: #ce9da6;
         border: none;
         position: relative;
 
@@ -20,6 +20,7 @@
         &::after {
             content: "";
             position: absolute;
+            border: 3px solid #000;
         }
 
         &::before {
@@ -28,7 +29,6 @@
             transform: translate(-50%, -50%);
             width: 24px;
             height: 20px;
-            border: 3px solid #000;
         }
 
         &::after {
@@ -37,7 +37,6 @@
             transform: translate(-50%, 0);
             width: 10px;
             height: 6px;
-            border: 3px solid #000;
         }
     }
 

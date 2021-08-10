@@ -5,8 +5,9 @@
     width: 100%;
     height: 100%;
     background-color: cornsilk;
-    transition: right 0.2s;
+    transition: right 0.33s cubic-bezier(0.64, 0.08, 0.29, 0.95);
     overflow-y: scroll;
+    z-index: 1;
 
     &.is-expanded {
         right: 0%;

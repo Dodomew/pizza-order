@@ -2,6 +2,7 @@ import Cart from "../Cart/Cart";
 import Routes from "../../Routes/Routes";
 import CartContextProvider from "../Cart/CartContext";
 import "./app.scss";
+import Backdrop from "../../Components/Backdrop/Backdrop";
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <CartContextProvider>
         <Routes />
         <Cart />
+        <Backdrop />
       </CartContextProvider>
     </div>
   );
