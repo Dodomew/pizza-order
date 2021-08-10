@@ -1,5 +1,6 @@
 import React from "react";
 import { useCart } from "../../Containers/Cart/CartContext";
+import "./product.scss";
 
 type ItemProps = {
   id: number;
@@ -16,21 +17,35 @@ const ProductItem = (item: ItemProps) => {
   };
 
   return (
-    <li key={`product_item_${item.name}_${item.id}`}>
-      <h4>{item.name}</h4>
-      <p>{item.price}</p>
-      {item.topping && item.topping.length ? (
-        <ul>
-          {item.topping.map((topping) => {
-            return (
-              <li key={`product_item_${item.name}_${topping}_${item.id}`}>
-                {topping}
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
-      <button onClick={handleAddItem}>Add to cart</button>
+    <li key={`product_item_${item.name}_${item.id}`} className="product-item">
+      <div className="product-item__content">
+        <h4 className="product-item__title">{item.name}</h4>
+        {item.topping && item.topping.length ? (
+          <div className="product-item__info">
+            <ul className="product-item__info-list">
+              {item.topping.map((topping, index, arr) => {
+                return (
+                  <li
+                    key={`product_item_${item.name}_${topping}_${item.id}`}
+                    className="product-item__info-item"
+                  >
+                    {arr.length - 1 === index ? `${topping}` : `${topping}, `}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
+        <p className="product-item__price">{item.price}kr</p>
+      </div>
+      <button onClick={handleAddItem} className="product-item__button">
+        <div
+          className="product-item__media"
+          style={{
+            backgroundImage: "url(https://via.placeholder.com/640x480)",
+          }}
+        ></div>
+      </button>
     </li>
   );
 };

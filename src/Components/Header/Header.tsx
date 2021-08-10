@@ -7,7 +7,9 @@ const Header = () => {
   const { toggleCartContainer, itemCount } = useCart();
   return (
     <div className="header">
-      <Link to={"/"}>LOGO</Link>
+      <Link to={"/"} className="header__logo">
+        Umain Pizzas
+      </Link>
       <button className="header__button" onClick={toggleCartContainer}>
         <span className="header__itemcount">{itemCount}</span>
       </button>
