@@ -1,5 +1,3 @@
-import React from "react";
-
 const CartOrderSummary = (props: OrderDetails) => {
   const { orderId, totalPrice, orderedAt, esitmatedDelivery, status } = props;
 
@@ -13,12 +11,28 @@ const CartOrderSummary = (props: OrderDetails) => {
 
   return (
     <div className="cart-order-details">
-      <p>Your order</p>
-      <p>Order id: {orderId}</p>
-      <p>Ordered at : {getDisplayTime(orderedAt)}</p>
-      <p>Status: {status}</p>
-      <p>Estimated delivery in : {getDisplayTime(esitmatedDelivery)}</p>
-      <p>Total: {totalPrice}kr</p>
+      <ul className="cart-order-details__summary">
+        <li className="cart-order-details__summary-item">
+          <span>Order ID</span>
+          <span>{orderId}</span>
+        </li>
+        <li className="cart-order-details__summary-item">
+          <span>Ordered at</span>
+          <span>{getDisplayTime(orderedAt)}</span>
+        </li>
+        <li className="cart-order-details__summary-item">
+          <span>Total</span>
+          <span>{totalPrice}kr</span>
+        </li>
+        <li className="cart-order-details__summary-item">
+          <span>Status</span>
+          <span>{status}</span>
+        </li>
+        <li className="cart-order-details__summary-item">
+          <span>Estimated delivery</span>
+          <span>{getDisplayTime(esitmatedDelivery)}</span>
+        </li>
+      </ul>
     </div>
   );
 };

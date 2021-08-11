@@ -1,4 +1,3 @@
-import React from "react";
 import { useCart } from "../../Containers/Cart/CartContext";
 import { Link } from "react-router-dom";
 import "./header.scss";

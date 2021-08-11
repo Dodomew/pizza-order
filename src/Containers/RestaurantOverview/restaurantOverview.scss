@@ -1,15 +1,20 @@
+.overview {
+    max-width: 600px;
+    margin: 0 auto 60px;
+}
+
 .overview-list {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     column-gap: 20px;
     row-gap: 30px;
-    margin-bottom: 60px;
 }
 
 .overview-list-item {
     border-radius: 5px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 
     &__wrapper {
         text-decoration: none;

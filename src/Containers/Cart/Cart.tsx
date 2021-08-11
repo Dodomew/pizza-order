@@ -59,15 +59,15 @@ const Cart = () => {
 
   return (
     <div className={"cart" + (cartContainerIsExpanded ? " is-expanded" : "")}>
-      <button onClick={toggleCartContainer} className="cart__close-button">
-        Close cart X
-      </button>
+      <div className="cart__header">
+        <h3 className="cart__title">
+          {currentOrderDetails ? "Your order" : "Your items"}
+        </h3>
+        <button onClick={toggleCartContainer} className="cart__close-button">
+          X
+        </button>
+      </div>
       <div className="cart__wrapper">
-        <div className="cart__header">
-          <h3 className="cart__title">
-            {currentOrderDetails ? "Your order" : "Your items"}
-          </h3>
-        </div>
         <div className="cart__overview">
           {currentOrderDetails ? (
             <CartOrderSummary {...currentOrderDetails} />

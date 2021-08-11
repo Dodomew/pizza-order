@@ -1,39 +1,53 @@
 .cart {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 100%;
     height: 100%;
     background-color: lighten(hotpink, 20%);
-    transition: right 0.33s cubic-bezier(0.64, 0.08, 0.29, 0.95);
+    transition: transform 0.33s cubic-bezier(0.64, 0.08, 0.29, 0.95);
     overflow-y: scroll;
     z-index: 1;
+    transform: translateX(100%);
+
+    @media (min-width: 768px) {
+        width: 320px;
+    }
 
     &.is-expanded {
-        right: 0%;
+        transform: translateX(0);
     }
 
     &__close-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
+        appearance: none;
+        width: 36px;
+        height: 36px;
+        border: 2px solid #000;
+        background-color: lighten(hotpink, 20%);
+        cursor: pointer;
     }
 
     &__wrapper {
-        padding: 60px 10px 10px;
+        padding: 20px;
         height: 100%;
     }
 
     &__header {
-        width: 100%;
-        font-size: 20px;
+        padding: 20px;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__title {
+        color: #000;
+        font-size: 24px;
         font-weight: bold;
-        padding-bottom: 8px;
-        border-bottom: 2px solid #000;
     }
 
     &__overview {
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     &__list {
@@ -71,6 +85,7 @@
         text-transform: uppercase;
         font-weight: bold;
         transition: transform 0.2s;
+        cursor: pointer;
 
         &:active {
             transform: scale(0.966);
@@ -113,6 +128,7 @@
         line-height: 20px;
         box-shadow: 0px 0px 0px 1px hotpink;
         transition: transform 0.2s;
+        cursor: pointer;
 
         &:active {
             transform: scale(0.95);
@@ -132,5 +148,28 @@
     &__quantity {
         padding: 0 10px;
         font-size: 14px;
+    }
+}
+
+.cart-order-details {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+
+    &__summary {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__summary-item {
+        margin-bottom: 8px;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+
+        & > span:last-child {
+            font-weight: bold;
+        }
     }
 }

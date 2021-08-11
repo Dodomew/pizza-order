@@ -1,4 +1,3 @@
-import React from "react";
 import { useCart } from "./CartContext";
 
 const CartCheckoutItem = (item: CartItemProps) => {
